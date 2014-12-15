@@ -1,0 +1,121 @@
+/* 
+Custom CSS for...
+'Modern Business' HTML Theme by Start Bootstrap
+
+All Start Bootstrap themes are licensed under Apache 2.0. 
+For more info and more free Bootstrap 3 HTML themes, visit http://startbootstrap.com!
+*/
+
+/* Global Styles */
+
+html, body {
+    height: 100%;
+}
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+.dropdown {
+    cursor:pointer;
+}
+
+
+.img-home-portfolio,
+.img-customer,
+.portfolio-item {
+    margin-bottom: 30px;
+}
+
+a{
+    cursor:pointer;
+}
+.tab-pane {
+    margin-top: 15px;
+}
+
+.navbar{
+    min-height: 0;
+}
+
+/* Page Sections */
+.section,
+.section-colored {
+    padding: 50px 0;
+}
+
+.section-colored {
+    background-color: #e1e1e1;
+    /* change this to change the background color of a colored section */
+}
+
+.sidebar {
+    margin-top: 40px;
+}
+
+.sidebar ul {
+    border-radius: 5px;
+    padding: 5px;
+    border: 1px solid #cccccc;
+}
+
+.actions{
+    width:30%;
+    float:right;
+}
+.files-table{
+    float:left;
+    width:70%;
+}
+.actions-tab th{
+    border-right: 1px solid #ddd;
+
+}
+.f-name{
+    width: 60%;
+}
+.f-type, .f-size {
+    width: 20%;
+}
+
+ul{
+    list-style: none;
+}
+.actions-tab li{
+    line-height: 35px;
+}
+
+.action{
+    font-size: 18px;
+}
+
+
+/* 404 Page Styles */
+.error-404 {
+    font-size: 8em;
+}
+
+
+
+/* Footer Styles */
+footer {
+    margin: 50px 0;
+}
+
+
+
+
+.ta-editor {
+    min-height: 300px;
+    height: auto;
+    overflow: auto;
+    font-family: inherit;
+    font-size: 100%;
+    margin:20px 0;
+}
+
+.buttons-container{
+    /*padding: 20px 0px;*/
+    text-align: right;
+}

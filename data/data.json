@@ -1,0 +1,23 @@
+[
+    {
+        "id":1,
+        "filename" :"first.html",
+        "size": "123",
+        "content": "base64string"
+
+    },
+    {
+        "id":2,
+        "filename" :"second.json",
+        "size": "321",
+        "content": "3124r12d12d"
+
+    },
+    {
+        "id":3,
+        "filename" :"third.pn.g",
+        "size": "1",
+        "content": "base6ertyuio876rfgyu876tf4string"
+
+    }
+]

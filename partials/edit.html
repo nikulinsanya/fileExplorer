@@ -1,0 +1,36 @@
+<div class="section">
+
+    <div class="container">
+        <div class="row">
+            <h3>
+                {{model.file.filename}}
+            </h3>
+        </div>
+
+        <div class="row">
+            <div text-angular ng-model="model.file.content" ta-toolbar="[[
+            'h1',
+            'h2',
+            'h3',
+            'bold',
+            'italics',
+            'underline',
+            'ul',
+            'ol',
+            'undo',
+            'redo',
+            'html',
+            'insertImage']]"></div>
+        </div>
+        <div class="row buttons-container">
+            <button class="btn btn-success" ng-click="model.save()">Save</button>
+            <button class="btn btn-danger" ng-click="model.cancel()">Cancel</button>
+        </div>
+        <div class="row">
+            <div ta-bind ng-model="model.file.content"></div>
+        </div>
+
+
+    </div>
+
+</div>
