@@ -1,0 +1,96 @@
+<div class="section">
+
+    <div class="container">
+
+
+
+
+        <div class="row" ng-if="!model.processImage">
+            <div class="row">
+                <div class="navbar">
+                    <input placeholder="File name" type="text" class="search-query" placeholder="Search" ng-model="model.file.filename">
+                    <span>.html</span>
+                </div>
+            </div>
+            <div class="row">
+                <div text-angular ng-model="model.file.content" ta-toolbar="[[
+                'h1',
+                'h2',
+                'h3',
+                'bold',
+                'italics',
+                'underline',
+                'ul',
+                'ol',
+                'undo',
+                'redo',
+                'html',
+                'insertImage']]"></div>
+
+            </div>
+            <div class="row buttons-container">
+                <button class="btn btn-success" ng-click="model.save()">Save</button>
+                <button class="btn btn-danger" ng-click="model.cancel()">Cancel</button>
+            </div>
+        </div>
+
+        <div class="row" ng-if="model.processImage">
+            <div class="row">
+
+                <div class="col-md-3">
+
+                    <h3>Select files</h3>
+
+                    <div ng-show="uploader.isHTML5">
+                        <div class="well my-drop-zone" nv-file-over="" uploader="uploader">
+                            Drop files here
+                        </div>
+                    </div>
+
+                    <input type="file" nv-file-select="" uploader="uploader" multiple  /><br/>
+
+                </div>
+
+                <div class="col-md-9" style="margin-bottom: 40px">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th width="50%">Name</th>
+                            <th ng-show="uploader.isHTML5">Size</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in uploader.queue">
+                            <td>
+                                <strong>{{ item.file.name }}</strong>
+                                <!-- Image preview -->
+                                <!--auto height-->
+                                <!--<div ng-thumb="{ file: item.file, width: 100 }"></div>-->
+                                <!--auto width-->
+                                <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 300 }"></div>
+                                <!--fixed width and height -->
+                                <!--<div ng-thumb="{ file: item.file, width: 100, height: 100 }"></div>-->
+                            </td>
+                            <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+            <div class="row buttons-container">
+                <button class="btn btn-success" ng-click="model.save()" ng-disabled="!uploader.getNotUploadedItems().length">Save</button>
+                <button class="btn btn-danger" ng-click="model.cancel()">Cancel</button>
+            </div>
+        </div>
+
+
+
+
+
+
+    </div>
+
+</div>

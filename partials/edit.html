@@ -2,9 +2,10 @@
 
     <div class="container">
         <div class="row">
-            <h3>
-                {{model.file.filename}}
-            </h3>
+            <div class="navbar">
+                <input placeholder="File name" type="text" class="search-query" placeholder="Search" ng-model="model.file.filename_splitted">
+                <span>.html</span>
+            </div>
         </div>
 
         <div class="row">
@@ -26,10 +27,6 @@
             <button class="btn btn-success" ng-click="model.save()">Save</button>
             <button class="btn btn-danger" ng-click="model.cancel()">Cancel</button>
         </div>
-        <div class="row">
-            <div ta-bind ng-model="model.file.content"></div>
-        </div>
-
 
     </div>
 

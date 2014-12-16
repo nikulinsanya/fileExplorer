@@ -11,6 +11,10 @@
         <div class="row">
                 <table class="table table-bordered table-striped files-table">
                     <tr>
+                        <th class="f-bookmark"><a ng-click="showBookmarks = !showBookmarks; model.resetSelect();">
+                            <span class="glyphicon" ng-class="{'glyphicon-star' : showBookmarks, 'glyphicon-star-empty':!showBookmarks}" ></span>
+                            </a>
+                        </th>
                         <th class="f-name"><a ng-click="orderByField='filename'; reverseSort = !reverseSort">
                             Name
                             <span ng-show="orderByField == 'filename'">
@@ -34,10 +38,11 @@
                         </a></th>
                     </tr>
 
-                    <tr ng-repeat="file in model.items | filter:search |orderBy:orderByField:reverseSort">
+                    <tr ng-repeat="file in model.items | filter:search | filter:model.filterBookmarked |orderBy:orderByField:reverseSort">
+                        <td class="f-bookmark" ng-class="{'info':file.selected}"><span ng-show="file.bookmarked" class="glyphicon glyphicon-star"></span></td>
                         <td ng-class="{'info':file.selected}"><a ng-click="model.selectItem(file)">{{file.filename}}</a></td>
-                        <td ng-class="{'info':file.selected}">{{file.size}}</td>
                         <td ng-class="{'info':file.selected}">{{file.type}}</td>
+                        <td ng-class="{'info':file.selected}">{{(file.size/1028).toFixed(1)}}</td>
 
                    </tr>
                 </table>
