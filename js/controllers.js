@@ -15,12 +15,15 @@ angular
         hasSelected: false,
         selectedFile: false,
         enableEdit : false,
+        base64url : this.selectedFile && this.selectedFile.content,
         selectItem:function(e){
             this.resetSelect();
             this.selectedFile = e;
             e.selected = true;
             $scope.model.enableEdit = parser.getFileExtension(e.filename) == 'html';
             $scope.model.hasSelected = e.selected;
+            $scope.model.base64url  =  this.selectedFile && this.selectedFile.content;
+            $scope.model.isText =  parser.getFileExtension(this.selectedFile.filename) == 'html';
         },
         resetSelect: function(){
             var i = $scope.model.items.length;
@@ -39,6 +42,18 @@ angular
             this.selectedFile.bookmarked = !this.selectedFile.bookmarked;
             storage.storeData($scope.model.items);
             this.selectedFile.selected = true;
+        },
+        download: function(){
+            var isText =  parser.getFileExtension(this.selectedFile.filename) == 'html';
+            if(isText){
+                var contentType = 'application/octet-stream';
+                var a = document.createElement('a');
+                var blob = new Blob([this.selectedFile.content], {'type':contentType});
+                a.href = window.URL.createObjectURL(blob);
+                a.download = this.selectedFile.filename;
+                a.click();
+            }
+
         },
         filterBookmarked: function(a){
             return ($scope.showBookmarks && a.bookmarked) || (!$scope.showBookmarks)
@@ -122,7 +137,7 @@ angular
                 name: 'imageFilter',
                 fn: function(item /*{File|FileLikeObject}*/, options) {
                     var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
-                    return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+                    return '|jpg|png|jpeg|gif|'.indexOf(type) !== -1;
                 }
             });
 

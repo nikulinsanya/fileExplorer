@@ -28,6 +28,16 @@
                            Preview
                        </a>
                    </li>
+                   <li>
+                       <a ng-if="!model.isText" class="action" download="{{model.selectedFile.filename}}" href="{{model.base64url}}">
+                           <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
+                           Download
+                       </a>
+                       <a ng-if="model.isText" class="action" ng-click="model.download()">
+                           <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
+                           Download
+                       </a>
+                   </li>
 
                </ul>
            </div>

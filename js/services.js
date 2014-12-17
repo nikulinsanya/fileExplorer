@@ -192,3 +192,11 @@ angular
     }
 }])
 
+.config( [
+    '$compileProvider',
+    function( $compileProvider )
+    {
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|file|blob):|data:image\//);
+    }
+]);
+
