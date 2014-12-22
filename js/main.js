@@ -18,6 +18,7 @@ app.config(['$routeProvider', function ($routeProvider) {
     .when("/edit/:id", {templateUrl: "partials/edit.html", controller: "EditCtrl"})
     .when("/create/:type", {templateUrl: "partials/create.html", controller: "CreateCtrl"})
     .when("/show/:id", {templateUrl: "partials/show.html", controller: "ShowCtrl"})
+    .when("/image", {templateUrl: "partials/image.html", controller: "ImageCtrl"})
 
     // else 404
     .otherwise("/", {templateUrl: "partials/files.html", controller: "FilesCtrl"});

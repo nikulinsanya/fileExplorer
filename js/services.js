@@ -34,7 +34,6 @@ angular
                 $http.get('data/data.json').
                     success(function(data, status, headers, config) {
                         self.storeData(data);
-                        debugger;
                         defer.resolve(self.prepareFilesAfterLoad(data));
                     }).
                     error(function(data, status, headers, config) {
@@ -79,7 +78,6 @@ angular
 
             self.loadData().then(function(files){
                 if(files){
-                    console.log('newFiles',newFiles);
                     j = newFiles.length;
                     while(j--){
                         file = newFiles[j];
@@ -160,11 +158,19 @@ angular
                 files[i].selected = false;
             }
             return files;
+        },
+        saveTmpImg: function(base64){
+            this.setItem('fb-image',base64);
+        },
+        getTmpImg: function(){
+            return this.getItem('fb-image');
+        },
+        resetTmpImg: function(){
+            this.setItem('fb-image','');
         }
     }
 
-    $rootScope.$on("savestate", service.SaveState);
-    $rootScope.$on("restorestate", service.RestoreState);
+
 
     return service;
 }])

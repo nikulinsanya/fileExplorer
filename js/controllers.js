@@ -4,7 +4,7 @@
 angular
 
 
-    .module('controller', ['angularFileUpload','directives','services'])
+    .module('controller', ['angularFileUpload','directives','services','ezfb'])
 
 /**
  * Controllers
@@ -141,6 +141,7 @@ angular
                 }
             });
 
+
             $scope.model = {
                 processImage: !!($routeParams.type == constants.fileTypes.image),
 
@@ -190,15 +191,81 @@ angular
                     }
 
                 },
-                uploadAll: function(){
 
-                },
                 cancel:function(){
                     $location.path('/');
                 }
-            }
-}])
+            };
 
-.controller('DeleteCtrl', function (/* $scope, $location, $http */) {
-    console.log("DeleteCtrl  Controller");
-});
+}])
+    .controller('ImageCtrl', ['$scope','$location','ezfb','storage','parser', function ($scope,$location,ezfb,storage,parser) {
+        var loggedIn = false;
+        $scope.model = {
+            fbAlbumName : '',
+            denied:false,
+            images: [],
+            is:[],
+            selectMode:true,
+            selectFbImage: function(src){
+                var c = document.getElementById("tmpcanvas");
+                var img = new Image();
+                img.crossOrigin = 'anonymous';
+                img.onload = onLoadImage;
+                img.src = src;
+
+                function onLoadImage() {
+                    $(c).attr({ width: this.width, height: this.height });
+                    c.getContext('2d').drawImage(this, 0, 0, this.width, this.height);
+                    var dataURL = c.toDataURL("image/png"),
+                        file = {
+                            content:dataURL,
+                            filename: $scope.model.fbAlbumName.replace(/\s/g,'') + '.jpg',
+                            size:dataURL.length
+                        };
+                    storage.setFiles([file]).then(function(){
+                        $location.path('/');
+                    });
+                }
+
+            },
+            getImages:function(){
+                ezfb.api('/me/albums', function (response) {
+                    $scope.model.is.push(1);
+                    //draw only images from first album
+                    $scope.model.fbAlbumName = response["data"][0].name;
+                    $scope.model.addOption(response["data"][0].name,response["data"][0].id);
+                });
+            },
+            facebook: function(){
+                $scope.model.is.push(1);
+                $scope.model.selectMode = false;
+                ezfb.login(function (res) {
+                    if (res.authResponse) {
+                        $scope.model.denied = false;
+                        $scope.model.getImages();
+                    }
+                    else{
+                        $scope.model.denied = true;
+                    }
+                }, {scope:'read_stream,publish_stream,offline_access,user_photos,friends_photos,user_photo_video_tags,friends_photo_video_tags'});
+            },
+
+            addOption:function (opText,opVal)
+            {
+                ezfb.api("/"+opVal+"/photos",function(response){
+                    var photos = response["data"];
+                    for(var v=0;v<photos.length;v++) {
+                        $scope.model.images.push(photos[v]["images"]);
+
+                    }
+                });
+            }
+        }
+
+    }])
+    .config(function (ezfbProvider) {
+        ezfbProvider.setInitParams({
+            appId: '1580526455496628'
+        });
+    });
+

@@ -1,0 +1,38 @@
+<div class="section">
+
+    <div class="container">
+        <div class="row image-select-container" ng-show="model.selectMode">
+            <div class="image-select">
+                <a ng-click="model.facebook()">
+                    <i class="fa fa-facebook-square"></i>
+                    <div>Upload from Facebook</div>
+                </a>
+            </div>
+            <div class="image-select">
+                <a href="#/create/img">
+                    <i class="fa fa-upload"></i>
+                    <div>Upload from PC</div>
+                </a>
+            </div>
+        </div>
+
+        <div id="albumsList" ng-show="model.images.length">
+
+            <h3> Select image:
+            </h3>
+            <img ng-repeat="item in model.images" crossorigin="anonymous" ng-src="{{item[4].source}}" class="select_fb-image" ng-click="model.selectFbImage(item[4].source)"/>
+            <canvas ng-show="false" id="tmpcanvas" style=""></canvas>
+        </div>
+        <div ng-if="model.denied">
+
+            <div class="row">
+                Permission denied
+            </div>
+            <div class="row">
+                <a href="#/" class="btn btn-danger">Back</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>

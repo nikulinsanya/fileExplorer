@@ -145,3 +145,29 @@ canvas.thumb {
     border:1px solid #ccc;
     margin: 10px 0px;
 }
+.image-select{
+    height: 200px;
+    width: 200px;
+    float: left;
+}
+.image-select a:hover{
+    text-decoration: none;
+}
+.image-select-container{
+    text-align: center;
+    left: 50%;
+    position: relative;
+    margin-left: -200px;
+    font-size: 30px;
+    margin-top:100px;
+}
+
+.select_fb-image{
+    float: left;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    max-width: 300px;
+    width: auto;
+
+    cursor:pointer;
+}
