@@ -33,17 +33,21 @@ angular
             $scope.model.hasSelected = false;
         },
         edit: function(){
+            ga('send', 'event', 'edit');
             $location.path('/edit/'+this.selectedFile.id);
         },
         show: function(){
+            ga('send', 'event', 'preview');
             $location.path('/show/'+this.selectedFile.id);
         },
         bookmark:function(){
+            ga('send', 'event', 'bookmark');
             this.selectedFile.bookmarked = !this.selectedFile.bookmarked;
             storage.storeData($scope.model.items);
             this.selectedFile.selected = true;
         },
         download: function(){
+            ga('send', 'event', 'download');
             var isText =  parser.getFileExtension(this.selectedFile.filename) == 'html';
             if(isText){
                 var contentType = 'application/octet-stream';
