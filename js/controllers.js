@@ -229,11 +229,16 @@ angular
 
             },
             getImages:function(){
+                var i;
                 ezfb.api('/me/albums', function (response) {
-                    $scope.model.is.push(1);
-                    //draw only images from first album
+                    //draw only images from first 2 albums
                     $scope.model.fbAlbumName = response["data"][0].name;
-                    $scope.model.addOption(response["data"][0].name,response["data"][0].id);
+                    i = response["data"] > 1 ? 1 : response["data"].length;
+
+                    while(i--){
+                        $scope.model.addOption(response["data"][i].name,response["data"][i].id);
+                    }
+
                 });
             },
             facebook: function(){
